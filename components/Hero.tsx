@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="relative w-full h-full">
         <Image
           src={Home}
-          width={600}
+          width={1000}
           height={300}
           alt="Hero Image"
           className="w-full h-full object-cover"

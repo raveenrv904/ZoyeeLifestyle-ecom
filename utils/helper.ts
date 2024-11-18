@@ -1,3 +1,5 @@
+import { Data } from "@/types/index.types";
+
 export const removeExtra = (content: string) => {
   return content.length > 15 ? content.slice(0, 15) + "...." : content;
 };
@@ -16,4 +18,20 @@ export const paginationData = (currentPageNo: number, pageSize: number) => {
   const end: number = currentPageNo * pageSize; // end index (not inclusive)
 
   return [start, end];
+};
+
+export const getFilteredData = (filterBy: string, data: Array<Data>) => {
+  console.log("Filter", filterBy);
+
+  if (filterBy === "By Title") {
+    return data.sort((a: Data, b: Data) => {
+      return a.title.localeCompare(b.title);
+    });
+  } else if (filterBy === "High To Low") {
+    return data.sort((a: Data, b: Data) => {
+      return b.price - a.price;
+    });
+  }
+
+  return data;
 };

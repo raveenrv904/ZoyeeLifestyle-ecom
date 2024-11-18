@@ -26,6 +26,8 @@ const ProductCard = ({
   discount,
   productId,
 }: Props) => {
+  const cartBtnClicked = () => {};
+
   return (
     <div className="bg-gray-50 cursor-pointer w-fit transition-transform transform hover:scale-105 hover:shadow-lg hover:bg-gray-100">
       <div className="relative w-full">
@@ -60,7 +62,10 @@ const ProductCard = ({
           >
             <button>Buy Now</button>
           </Link>
-          <button className="flex-[0.3]  py-3 border-[2px] border-primary hover:bg-white transition-all saturate-200 ease-in-out text-primary flex rounded-lg justify-center items-center">
+          <button
+            onClick={cartBtnClicked}
+            className="flex-[0.3]  py-3 border-[2px] border-primary hover:bg-white transition-all saturate-200 ease-in-out text-primary flex rounded-lg justify-center items-center"
+          >
             <ShoppingCart />
           </button>
         </div>

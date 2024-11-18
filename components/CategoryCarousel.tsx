@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -11,6 +12,10 @@ import Image from "next/image";
 
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
+
+const loaderProps = ({ src }: { src: any }) => {
+  return src;
+};
 
 const CategoryCarousel = () => {
   const { getAllCategories, categories } = useAuthStore();
@@ -37,6 +42,7 @@ const CategoryCarousel = () => {
                 height={300}
                 className="w-full h-[400px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[450px] rounded-[20px] object-cover"
                 alt={item.name}
+                loader={loaderProps}
               />
               <h3 className="text-xl font-semibold tracking-wider pt-4 sm:text-2xl md:text-xl lg:text-2xl">
                 {item.name}

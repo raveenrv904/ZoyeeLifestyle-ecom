@@ -3,7 +3,7 @@ import React from "react";
 
 const SpecialBanner = () => {
   return (
-    <section className="p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row justify-evenly bg-other ">
+    <section className="p-4  sm:p-6 lg:py-10 flex flex-col md:flex-row justify-evenly bg-other ">
       {SPECIALBANNER.map((item, index) => (
         <div
           key={index}

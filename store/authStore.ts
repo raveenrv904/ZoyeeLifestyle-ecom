@@ -87,4 +87,18 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ isLoading: false });
     }
   },
+
+  addToCart: async () => {
+    set({ isLoading: true, error: null });
+    try {
+    } catch (error: any) {
+      set({
+        error: error.response.data.message || "Error signing up",
+        isLoading: false,
+      });
+      throw error;
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));

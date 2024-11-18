@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Filter from "@/components/Filter";
@@ -8,25 +6,37 @@ import PaginationSection from "@/components/PaginationSection";
 import ProductCard from "@/components/ProductCard";
 import SpecialBanner from "@/components/SpecialBanner";
 import { useAuthStore } from "@/store/authStore";
-import { paginationData } from "@/utils/helper";
+import { Data } from "@/types/index.types";
+import { getFilteredData, paginationData } from "@/utils/helper";
 import React, { useEffect, useState } from "react";
 
 const Shop = () => {
-  const { allProducts, getAllProducts } = useAuthStore();
+  const { allProducts, getAllProducts, isLoading } = useAuthStore();
 
   const [currentPage, setCurrentPage] = useState(1);
-
   const [productPerPage, setProductPerPage] = useState(16);
   const [totalPossiblePage, setTotalPossiblePage] = useState(0);
 
-  // Recalculate total pages whenever allProducts or productPerPage changes
+  const [filterData, setFilterData] = useState<Data[]>([]);
+
+  const [filter, setFilter] = useState<string>("Filter");
+
   useEffect(() => {
     if (allProducts && allProducts.length > 0) {
       setTotalPossiblePage(Math.ceil(allProducts.length / productPerPage));
     } else {
-      setTotalPossiblePage(0); // You could set it to 0 if no products exist
+      setTotalPossiblePage(0);
     }
-  }, [allProducts, productPerPage]); // dependency array ensures it recalculates when either value changes
+  }, [allProducts, productPerPage]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const newFilteredData = await getFilteredData(filter, allProducts);
+      setFilterData(newFilteredData);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter]);
 
   const [productSlice, setProductSlice] = useState<{
     start: number;
@@ -38,29 +48,30 @@ const Shop = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [getAllProducts]);
 
   useEffect(() => {
     const fetchStartAndEnd = async () => {
       const [start, end] = await paginationData(currentPage, productPerPage);
-      setProductSlice({
-        ...productSlice,
-        start,
-        end,
-      });
+      setProductSlice({ start, end }); // Directly set the new state
     };
     fetchStartAndEnd();
-  }, [currentPage]);
+  }, [currentPage, productPerPage]); // Added `productPerPage` to dependencies
 
   return (
     <div className="w-full">
       <PageBanner title="shop" />
-      <Filter setProductPerPage={setProductPerPage} />
+      <Filter
+        setProductPerPage={setProductPerPage}
+        filter={filter}
+        setFilter={setFilter}
+      />
       <div className="w-full flex justify-center items-center !mt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 px-12 md:px-16">
-          {allProducts
+          {(filterData.length > 0 ? filterData : allProducts)
             .slice(productSlice.start, productSlice.end)
-            ?.map((item: any) => {
+            .map((item) => {
+              // Use the `Product` type for better type safety
               return (
                 <ProductCard
                   productId={item.id}
@@ -73,6 +84,7 @@ const Shop = () => {
                 />
               );
             })}
+          {isLoading && <h2>Loading....</h2>}
         </div>
       </div>
 
