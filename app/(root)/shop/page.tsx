@@ -1,6 +1,7 @@
 "use client";
 
 import Filter from "@/components/Filter";
+import LoadingTemplate from "@/components/LoadingTemplate";
 import PageBanner from "@/components/PageBanner";
 import PaginationSection from "@/components/PaginationSection";
 import ProductCard from "@/components/ProductCard";
@@ -32,7 +33,9 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       const newFilteredData = await getFilteredData(filter, allProducts);
-      setFilterData(newFilteredData);
+      // console.log("New Filtered Data", newFilteredData);
+
+      setFilterData([...newFilteredData]);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,50 +56,56 @@ const Shop = () => {
   useEffect(() => {
     const fetchStartAndEnd = async () => {
       const [start, end] = await paginationData(currentPage, productPerPage);
-      setProductSlice({ start, end }); // Directly set the new state
+      setProductSlice({ start, end });
     };
     fetchStartAndEnd();
-  }, [currentPage, productPerPage]); // Added `productPerPage` to dependencies
+  }, [currentPage, productPerPage]);
 
   return (
     <div className="w-full">
-      <PageBanner title="shop" />
-      <Filter
-        setProductPerPage={setProductPerPage}
-        filter={filter}
-        setFilter={setFilter}
-      />
-      <div className="w-full flex justify-center items-center !mt-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 px-12 md:px-16">
-          {(filterData.length > 0 ? filterData : allProducts)
-            .slice(productSlice.start, productSlice.end)
-            .map((item) => {
-              // Use the `Product` type for better type safety
-              return (
-                <ProductCard
-                  productId={item.id}
-                  imgUrl={item.images[0]}
-                  title={item.title}
-                  price={item.price}
-                  discount={20}
-                  category={item.category.name}
-                  key={item.id}
-                />
-              );
-            })}
-          {isLoading && <h2>Loading....</h2>}
+      {isLoading ? (
+        <div className="w-full">
+          <LoadingTemplate />
         </div>
-      </div>
+      ) : (
+        <>
+          <PageBanner title="shop" />
+          <Filter
+            setProductPerPage={setProductPerPage}
+            filter={filter}
+            setFilter={setFilter}
+          />
+          <div className="w-full flex justify-center items-center !my-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-3 md:px-16">
+              {(filterData.length > 0 ? filterData : allProducts)
+                .slice(productSlice.start, productSlice.end)
+                .map((item) => {
+                  return (
+                    <ProductCard
+                      productId={item.id}
+                      imgUrl={item.images[0]}
+                      title={item.title}
+                      price={item.price}
+                      discount={20}
+                      category={item.category.name}
+                      key={item.id}
+                    />
+                  );
+                })}
+            </div>
+          </div>
 
-      {allProducts.length > productPerPage && (
-        <PaginationSection
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPossiblePage={totalPossiblePage}
-        />
+          {allProducts.length > productPerPage && (
+            <PaginationSection
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalPossiblePage={totalPossiblePage}
+            />
+          )}
+
+          <SpecialBanner />
+        </>
       )}
-
-      <SpecialBanner />
     </div>
   );
 };

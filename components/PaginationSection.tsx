@@ -33,24 +33,15 @@ const PaginationSection = ({
     <div className="w-full my-6 sm:my-8 lg:my-12 px-4">
       <Pagination>
         <PaginationContent className="flex justify-center items-center gap-2 sm:gap-4">
-          {/* Previous Button */}
-          <PaginationItem
-            className="cursor-pointer  text-white "
-            onClick={previousPage}
-          >
+          <PaginationItem className="cursor-pointer  " onClick={previousPage}>
             <PaginationPrevious />
           </PaginationItem>
 
-          {/* Current Page Display */}
           <PaginationItem className="text-sm sm:text-base ">
             <PaginationLink>{currentPage}</PaginationLink>
           </PaginationItem>
 
-          {/* Next Button */}
-          <PaginationItem
-            onClick={nextPage}
-            className=" cursor-pointer text-white "
-          >
+          <PaginationItem onClick={nextPage} className=" cursor-pointer ">
             <PaginationNext />
           </PaginationItem>
         </PaginationContent>

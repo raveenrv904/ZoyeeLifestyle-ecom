@@ -109,6 +109,7 @@ export function FilterComboBox({
           {value
             ? filterData.find((item) => item.value === value)?.label
             : filter}
+          {/* {filter} */}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
@@ -146,6 +147,17 @@ export function FilterComboBox({
                 </CommandGroup>
               </div>
             ))}
+
+            {/* <div
+              onClick={() => {
+                setFilter("Filter");
+                setValue("");
+              }}
+              className="p-3 cursor-pointer text-red-500 flex items-center gap-1 hover:bg-red-500 duration-300 hover:text-white ease-in-out transition-all"
+            >
+              <CircleX className="w-5 h-5" />
+              <h3>Clear Filter</h3>
+            </div> */}
           </CommandList>
         </Command>
       </PopoverContent>

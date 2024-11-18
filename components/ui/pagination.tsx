@@ -52,7 +52,7 @@ const PaginationLink = ({
       buttonVariants({
         size,
       }),
-      "font-bold tracking-widest"
+      "font-semibold"
     )}
     {...props}
   />
@@ -66,7 +66,7 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn("gap-1 !rounded-md px-4 py-2 sm:p-3", className)}
+    className={cn("gap-1 !rounded-md", className)}
     {...props}
   >
     <ChevronLeft className="h-4 w-4" />
@@ -82,7 +82,7 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn("gap-1 !rounded-md px-4 py-2 sm:p-3", className)}
+    className={cn("gap-1 !rounded-md", className)}
     {...props}
   >
     <span>Next</span>

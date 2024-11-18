@@ -101,4 +101,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ isLoading: false });
     }
   },
+
+  getAllProductsFromCard: async () => {},
 }));

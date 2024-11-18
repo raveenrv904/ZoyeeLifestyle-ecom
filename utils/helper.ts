@@ -21,15 +21,21 @@ export const paginationData = (currentPageNo: number, pageSize: number) => {
 };
 
 export const getFilteredData = (filterBy: string, data: Array<Data>) => {
-  console.log("Filter", filterBy);
+  // console.log(filterBy);
 
   if (filterBy === "By Title") {
     return data.sort((a: Data, b: Data) => {
       return a.title.localeCompare(b.title);
     });
-  } else if (filterBy === "High To Low") {
+  } else if (filterBy === "High to Low") {
+    console.log("inside the title");
+
     return data.sort((a: Data, b: Data) => {
       return b.price - a.price;
+    });
+  } else if (filterBy === "Low to High") {
+    return data.sort((a: Data, b: Data) => {
+      return a.price - b.price;
     });
   }
 
