@@ -14,10 +14,6 @@ interface Props {
   discount: number;
 }
 
-const loaderProps = ({ src }: { src: any }) => {
-  return src;
-};
-
 const ProductCard = ({
   imgUrl,
   title,
@@ -38,7 +34,6 @@ const ProductCard = ({
             width={250}
             height={30}
             className="object-cover w-full transition-all duration-300 hover:opacity-80 "
-            loader={loaderProps}
           />
           <div className="px-3 text-sm rounded-[20px] font-semibold absolute top-3 right-3 z-20 bg-white tracking-wider text-emerald-700">
             -{discount}%
