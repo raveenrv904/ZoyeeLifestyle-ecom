@@ -11,7 +11,7 @@ const Allproducts = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [getAllProducts]);
 
   return (
     <section className="w-full space-y-3">

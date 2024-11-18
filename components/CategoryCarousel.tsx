@@ -14,8 +14,6 @@ import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
 
 const loaderProps = ({ src }: { src: any }) => {
-  console.log("Url", src);
-
   return src;
 };
 
@@ -27,7 +25,7 @@ const CategoryCarousel = () => {
       await getAllCategories();
     };
     func();
-  }, []);
+  }, [getAllCategories]);
 
   return (
     <Carousel>

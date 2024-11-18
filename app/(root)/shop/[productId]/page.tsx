@@ -1,6 +1,6 @@
 import React from "react";
 
-const SingleProductPage = ({ params }: { params: { productId: string } }) => {
+const SingleProductPage = ({ params }: { params: { productId: number } }) => {
   return <div>Page: {params.productId}</div>;
 };
 
