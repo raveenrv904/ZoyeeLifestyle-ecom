@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import Counter from "./Counter";
-import { ShoppingBag, ShoppingCart } from "lucide-react";
+import { Facebook, Instagram, ShoppingBag, ShoppingCart } from "lucide-react";
 import {
   calculateDiscountedPrice,
   toggleLocalStorageCart,
 } from "@/utils/helper";
 import toast from "react-hot-toast";
+import AdditionalInfo from "./AdditionalInfo";
 
 interface Props {
   productId: number;
@@ -116,6 +117,22 @@ const ProductDetails = ({
             {isProductInCart ? "Remove From Cart" : "Add To Cart"}
           </button>
         </div>
+      </div>
+      <div className="">
+        <AdditionalInfo
+          skuValue="SS001"
+          tags={["dress", "fashion", "ladies"]}
+          socialMedia={[
+            {
+              Icon: Facebook,
+              link: "https://google.com",
+            },
+            {
+              Icon: Instagram,
+              link: "https://google.com",
+            },
+          ]}
+        />
       </div>
     </div>
   );

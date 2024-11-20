@@ -2,7 +2,6 @@
 import { isImage } from "@/utils/helper";
 import Image from "next/image";
 import React, { useState } from "react";
-
 import { Zoom } from "react-img-zoomer";
 
 const SingleProductImageDisplay = ({
@@ -18,13 +17,13 @@ const SingleProductImageDisplay = ({
 
   return (
     <div className="w-full">
-      <div className="">
-        <div className="w-full h-full py-5 flex justify-center items-center">
+      <div className="flex flex-col items-center">
+        <div className="w-full py-5 flex justify-center items-center">
           {isImage(mainImage) ? (
             <Zoom
               imagesrc={mainImage}
               size={300}
-              className="w-full rounded-md shadow-xl"
+              className="w-full md:w-2/3 lg:w-1/2 rounded-md shadow-xl"
             />
           ) : (
             <video controls style={{ maxWidth: "100%" }}>
@@ -34,22 +33,24 @@ const SingleProductImageDisplay = ({
           )}
         </div>
 
-        <div className="flex w-full justify-center items-center gap-3">
+        {/* Thumbnails */}
+        <div className="flex w-full justify-center items-center gap-3 mt-5 overflow-x-auto">
           {imageOrVideoUrl.map((image, index) => {
             return isImage(image) ? (
-              <Image
-                src={image}
-                width={70}
-                height={40}
-                alt="side image"
-                key={index}
-                className={`rounded-md cursor-pointer ${
-                  image === mainImage && "border-[2px]"
-                } border-pink-600`}
-                onClick={() => changeImage(image)}
-              />
+              <div key={index} className="flex-shrink-0">
+                <Image
+                  src={image}
+                  width={70}
+                  height={40}
+                  alt="side image"
+                  className={`rounded-md cursor-pointer ${
+                    image === mainImage && "border-2 border-pink-600"
+                  }`}
+                  onClick={() => changeImage(image)}
+                />
+              </div>
             ) : (
-              <video controls width={50} height={20}>
+              <video controls width={70} height={40} key={index}>
                 <source src={image} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>

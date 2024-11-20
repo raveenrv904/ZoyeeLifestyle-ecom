@@ -12,19 +12,31 @@ import { removeExtra } from "@/utils/helper";
 
 const SingleProductBanner = ({ productName }: { productName: string }) => {
   return (
-    <div className="w-full bg-other  px-7 py-3">
+    <div className="w-full bg-pink-50 px-4 sm:px-6 md:px-7 py-4 sm:py-5 md:py-6">
       <Breadcrumb>
-        <BreadcrumbList>
+        <BreadcrumbList className="flex flex-wrap items-center">
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <BreadcrumbLink
+              href="/"
+              className="text-sm sm:text-base md:text-lg"
+            >
+              Home
+            </BreadcrumbLink>
           </BreadcrumbItem>
-          <BreadcrumbSeparator />
+          <BreadcrumbSeparator className="mx-2 text-sm sm:text-base md:text-lg" />
           <BreadcrumbItem>
-            <BreadcrumbLink href="/shop">Shop</BreadcrumbLink>
+            <BreadcrumbLink
+              href="/shop"
+              className="text-sm sm:text-base md:text-lg"
+            >
+              Shop
+            </BreadcrumbLink>
           </BreadcrumbItem>
-          <BreadcrumbSeparator />
+          <BreadcrumbSeparator className="mx-2 text-sm sm:text-base md:text-lg" />
           <BreadcrumbItem>
-            <BreadcrumbPage>{removeExtra(productName)}</BreadcrumbPage>
+            <BreadcrumbPage className="text-sm sm:text-base md:text-lg">
+              {removeExtra(productName)}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

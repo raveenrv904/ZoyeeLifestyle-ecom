@@ -48,7 +48,7 @@ const Counter = ({ total }: { total: number }) => {
       </div>
 
       {total < 7 && (
-        <p className="text-red-400 font-semibold text-center sm:text-left mt-2">
+        <p className="text-red-400 font-semibold sm:text-left mt-2">
           Hurry Up! Only {total} Left
         </p>
       )}

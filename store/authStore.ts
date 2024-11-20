@@ -12,6 +12,8 @@ interface AuthStore {
   getSingleProduct: (productId: any) => Promise<any>;
   categoryProducts: any[];
   getCategoryProducts: (categoryName: any) => Promise<any>;
+  signin: (email: string, password: string) => Promise<any>;
+  signup: (username: string, email: string, password: string) => Promise<any>;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({

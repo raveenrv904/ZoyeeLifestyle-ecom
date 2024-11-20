@@ -45,7 +45,6 @@ const RelatedProducts = ({ categoryId }: { categoryId: any }) => {
             ))}
           </CarouselContent>
 
-          {/* Carousel Navigation */}
           <div className="space-x-4 py-5 flex justify-center md:justify-between">
             <CarouselPrevious className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition-all" />
             <CarouselNext className="p-2 rounded-full bg-gray-300 hover:bg-gray-400 transition-all" />
