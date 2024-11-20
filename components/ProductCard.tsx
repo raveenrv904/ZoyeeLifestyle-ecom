@@ -34,11 +34,14 @@ const ProductCard = ({
             width={250}
             height={30}
             className="object-cover w-full transition-all duration-300 hover:opacity-80 "
+            loader={({ src }: { src: any }) => {
+              return src;
+            }}
           />
-          <div className="px-3 text-sm rounded-[20px] font-semibold absolute top-3 right-3 z-20 bg-white tracking-wider text-emerald-700">
+          <div className="px-3  text-sm rounded-[20px] font-semibold absolute top-3 right-3 z-20 bg-white tracking-wider text-emerald-700">
             -{discount}%
           </div>
-          <div className="p-2 text-sm rounded-full flex justify-center items-center font-semibold absolute bottom-3 right-3 z-20 bg-white tracking-wider text-emerald-700">
+          <div className="p-2 text-sm rounded-full flex justify-center items-center font-semibold absolute bottom-3 right-3 z-20 bg-white tracking-wider text-pink-600 hover:text-white hover:bg-pink-500 transition-all duration-200">
             <ShoppingCart className="w-4 h-4" />
           </div>
         </div>

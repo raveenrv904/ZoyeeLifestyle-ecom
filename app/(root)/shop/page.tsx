@@ -33,7 +33,6 @@ const Shop = () => {
   useEffect(() => {
     const fetchData = async () => {
       const newFilteredData = await getFilteredData(filter, allProducts);
-      // console.log("New Filtered Data", newFilteredData);
 
       setFilterData([...newFilteredData]);
     };

@@ -20,9 +20,11 @@ const Navbar = () => {
       className="w-full flex justify-between items-center px-6 py-4 lg:px-12 lg:py-6 bg-white shadow-md"
     >
       {/* Logo Section */}
-      <div className="w-10 h-10">
-        <AuthLogo width={200} height={40} />
-      </div>
+      <Link href="/">
+        <div className="w-10 h-10">
+          <AuthLogo width={200} height={40} />
+        </div>
+      </Link>
 
       {/* Navigation Links */}
       <motion.div

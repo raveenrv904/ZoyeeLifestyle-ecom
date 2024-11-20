@@ -9,6 +9,9 @@ interface AuthStore {
   getAllCategories: () => Promise<void>;
   allProducts: any[];
   getAllProducts: () => Promise<void>;
+  getSingleProduct: (productId: any) => Promise<any>;
+  categoryProducts: any[];
+  getCategoryProducts: (categoryName: any) => Promise<any>;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -19,6 +22,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   message: null,
   categories: [],
   allProducts: [],
+  categoryProducts: [],
 
   signup: async (username: string, email: string, password: string) => {
     set({ isLoading: true, error: null });
@@ -62,7 +66,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ categories: data.slice(0, 5) });
     } catch (error: any) {
       set({
-        error: error.response.data.message || "Error signing up",
+        error: error.response.data.message || "Error Fetching Category",
         isLoading: false,
       });
       throw error;
@@ -79,7 +83,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       set({ allProducts: data });
     } catch (error: any) {
       set({
-        error: error.response.data.message || "Error signing up",
+        error: error.response.data.message || "Error Fetching All Products",
         isLoading: false,
       });
       throw error;
@@ -88,12 +92,17 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  addToCart: async () => {
+  getSingleProduct: async (productId: number) => {
     set({ isLoading: true, error: null });
     try {
+      const response = await fetch(
+        `https://api.escuelajs.co/api/v1/products/${productId}`
+      );
+      const data = response.json();
+      return data;
     } catch (error: any) {
       set({
-        error: error.response.data.message || "Error signing up",
+        error: error.response.data.message || "Error Fetching Single Products",
         isLoading: false,
       });
       throw error;
@@ -102,5 +111,22 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  getAllProductsFromCard: async () => {},
+  getCategoryProducts: async (categoryId: any) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await fetch(
+        `https://api.escuelajs.co/api/v1/products/?categoryId=${categoryId}`
+      );
+      const data = await response.json();
+      set({ categoryProducts: data });
+    } catch (error: any) {
+      set({
+        error: error.response.data.message || "Error Fetching Single Products",
+        isLoading: false,
+      });
+      throw error;
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
